@@ -1,0 +1,24 @@
+version: '3'
+services:
+  mysql:
+    restart: always
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=112233
+    ports:
+      - 3306:3306
+
+  3d-model-convert-to-gltf:
+    restart: always
+    image: wj2015/3d-model-convert-to-gltf:latest
+    ports:
+      - 8999:8999
+
+  go-service:
+    restart: always
+    build: .
+    ports:
+      - 8080:8997
+    depends_on:
+      - 3d-model-convert-to-gltf
+      - mysql

@@ -9,19 +9,24 @@ import (
 	"artifact_svr/rpc"
 )
 
-func Init() {
+func Init() error {
 	rpc.Init()
 
 	err := db.InitMySQL()
 	if err != nil {
 		fmt.Println("Failed to init MySQL:", err)
-		return
+		return err
 	}
+	return nil
 }
 
 func main() {
-	Init()
-	err := server.Run()
+	err := Init()
+	if err != nil {
+		fmt.Println("Failed Init server:", err)
+		return
+	}
+	err = server.Run()
 	if err != nil {
 		fmt.Println("Failed to run server:", err)
 		return

@@ -28,7 +28,7 @@ func testCreate() string {
 		grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(256 * 1024 * 1024)), // 设置接收消息的最大大小
 		grpc.WithInsecure(),
 	}
-	conn, err := grpc.Dial("localhost:8997", opts...)
+	conn, err := grpc.Dial("localhost:8080", opts...)
 	if err != nil {
 		log.Fatalf("grpc.Dial err: %v", err)
 		return ""
@@ -59,7 +59,7 @@ func testQuery(id string) {
 		grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(256 * 1024 * 1024)), // 设置接收消息的最大大小
 		grpc.WithInsecure(),
 	}
-	conn, err := grpc.Dial("localhost:8997", opts...)
+	conn, err := grpc.Dial("localhost:8080", opts...)
 	if err != nil {
 		log.Fatalf("grpc.Dial err: %v", err)
 		return
@@ -85,7 +85,7 @@ func testUpdate(id, name, desc, loca string) {
 		grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(256 * 1024 * 1024)), // 设置接收消息的最大大小
 		grpc.WithInsecure(),
 	}
-	conn, err := grpc.Dial("localhost:8997", opts...)
+	conn, err := grpc.Dial("localhost:8080", opts...)
 	if err != nil {
 		log.Fatalf("grpc.Dial err: %v", err)
 		return

@@ -11,7 +11,7 @@ var DB *gorm.DB
 // InitMySQL 函数用于初始化 MySQL 连接、创建表以及获取增删改查句柄
 func InitMySQL() error {
 	// 连接 MySQL 数据库
-	dsn := "root:112233@tcp(localhost:3306)/mysql?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:112233@tcp(mysql:3306)/mysql?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return err

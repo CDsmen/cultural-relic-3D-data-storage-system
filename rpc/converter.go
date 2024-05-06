@@ -15,7 +15,7 @@ func Init() {
 		grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(256 * 1024 * 1024)), // 设置接收消息的最大大小
 		grpc.WithInsecure(),
 	}
-	conn, err := grpc.Dial("localhost:8999", opts...)
+	conn, err := grpc.Dial("3d-model-convert-to-gltf:8999", opts...)
 	if err != nil {
 		log.Fatalf("grpc.Dial err: %v", err)
 	}
