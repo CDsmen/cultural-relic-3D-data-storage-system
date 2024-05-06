@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+option go_package = "grpc_gen/artifact_svr";
+
+service ArtifactService {
+  rpc StoreArtifact(StoreArtifactReq) returns (StoreArtifactResp) {}
+  rpc UpdateArtifact(UpdateArtifactReq) returns (UpdateArtifactResp) {}
+  rpc QueryArtifact(QueryArtifactReq) returns (QueryArtifactResp) {}
+}
+
+message BaseResp {
+  string message = 1;
+  int32 code = 2;
+}
+
+enum FileType {
+  STL = 0;
+  IGES = 1;
+  STP = 2;
+  OBJ = 3;
+  FBX = 4;
+}
+
+message ArtifactInfo {
+  string name = 1;
+  string description = 2;
+  string location = 3;
+}
+
+message StoreArtifactReq {
+  bytes file = 1;
+  FileType type = 2;
+  ArtifactInfo info = 3;
+}
+
+message StoreArtifactResp {
+  BaseResp base_resp = 1;
+  string artifact_id = 2;
+}
+
+message UpdateArtifactReq {
+  string artifact_id = 1;
+  ArtifactInfo info = 2;
+}
+
+message UpdateArtifactResp {
+  BaseResp base_resp = 1;
+}
+
+message QueryArtifactReq {
+  string artifact_id = 1;
+  bool need_basic_info = 2;
+  bool need_compressed_3d_file = 3;
+  bool need_source_3d_file = 4;
+}
+
+message QueryArtifactResp {
+  BaseResp base_resp = 1;
+  ArtifactInfo basic_info = 2;
+  bytes compressed_3d_file = 3;
+  bytes source_3d_file = 4;
+}
